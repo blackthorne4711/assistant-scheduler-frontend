@@ -9,10 +9,10 @@
           <CNavLink href="/dashboard"> Dashboard </CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="/timeslots"> Timeslots </CNavLink>
+          <CNavLink href="/booking/timeslots"> Timeslots </CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="/settings"> Settings </CNavLink>
+          <CNavLink href="/user/settings"> Settings </CNavLink>
         </CNavItem>
       </CHeaderNav>
     </CContainer>
