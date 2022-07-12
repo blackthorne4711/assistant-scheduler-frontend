@@ -6,13 +6,13 @@
       </CHeaderToggler>
       <CHeaderNav class="d-none d-md-flex me-auto">
         <CNavItem>
-          <CNavLink href="/dashboard"> Dashboard </CNavLink>
+          <CNavLink href="#/dashboard"> Dashboard </CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="/booking/timeslots"> Timeslots </CNavLink>
+          <CNavLink href="#/booking/timeslots"> Timeslots </CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="/user/settings"> Settings </CNavLink>
+          <CNavLink href="#/user/settings"> Settings </CNavLink>
         </CNavItem>
       </CHeaderNav>
     </CContainer>
