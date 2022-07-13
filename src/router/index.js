@@ -88,6 +88,21 @@ const routes = [
             name: 'Settings',
             component: () => import('@/views/user/Settings.vue'),
           },
+          {
+            path: '/user/login',
+            name: 'Login',
+            component: () => import('@/views/user/Login'),
+          },
+          {
+            path: '/user/logout',
+            name: 'Logout',
+            component: () => import('@/views/user/Logout'),
+          },
+          {
+            path: '/user/register',
+            name: 'Register',
+            component: () => import('@/views/user/Register'),
+          },
         ],
       },
     ],
@@ -111,16 +126,6 @@ const routes = [
         path: '500',
         name: 'Page500',
         component: () => import('@/views/pages/Page500'),
-      },
-      {
-        path: 'login',
-        name: 'Login',
-        component: () => import('@/views/pages/Login'),
-      },
-      {
-        path: 'register',
-        name: 'Register',
-        component: () => import('@/views/pages/Register'),
       },
     ],
   },

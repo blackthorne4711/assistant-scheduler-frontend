@@ -3,18 +3,25 @@
     <CContainer>
       <CRow class="justify-content-center">
         <CCol :md="8">
+          <CIcon
+            custom-class-name="login-brand-full"
+            :icon="logo"
+            :height="80"
+          />
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
                 <CForm>
                   <h1>Login</h1>
-                  <p class="text-medium-emphasis">Sign In to your account</p>
+                  <p class="text-medium-emphasis">
+                    Logga in med ditt Stallhjälpen konto
+                  </p>
                   <CInputGroup class="mb-3">
                     <CInputGroupText>
                       <CIcon icon="cil-user" />
                     </CInputGroupText>
                     <CFormInput
-                      placeholder="Username"
+                      placeholder="Användarnamn"
                       autocomplete="username"
                     />
                   </CInputGroup>
@@ -24,7 +31,7 @@
                     </CInputGroupText>
                     <CFormInput
                       type="password"
-                      placeholder="Password"
+                      placeholder="Lösenord"
                       autocomplete="current-password"
                     />
                   </CInputGroup>
@@ -34,7 +41,7 @@
                     </CCol>
                     <CCol :xs="6" class="text-right">
                       <CButton color="link" class="px-0">
-                        Forgot password?
+                        Glömt lösenord?
                       </CButton>
                     </CCol>
                   </CRow>
@@ -44,14 +51,13 @@
             <CCard class="text-white bg-primary py-5" style="width: 44%">
               <CCardBody class="text-center">
                 <div>
-                  <h2>Sign up</h2>
+                  <h2>Anmäl dig</h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
+                    Om du saknar konto så kan du ansöka om konto här, för att
+                    kunna se tillgängliga tider att hjälpa till i stallet.
                   </p>
                   <CButton color="light" variant="outline" class="mt-3">
-                    Register Now!
+                    Registrering
                   </CButton>
                 </div>
               </CCardBody>
@@ -64,7 +70,15 @@
 </template>
 
 <script>
+import { logo } from '@/assets/logo/logo'
+
 export default {
   name: 'Login',
+  components: {},
+  setup() {
+    return {
+      logo,
+    }
+  },
 }
 </script>

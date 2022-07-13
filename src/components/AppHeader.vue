@@ -15,6 +15,9 @@
           <CNavLink href="#/user/settings"> Settings </CNavLink>
         </CNavItem>
       </CHeaderNav>
+      <CHeaderNav>
+        <AppHeaderDropdownAccnt />
+      </CHeaderNav>
     </CContainer>
     <CHeaderDivider />
     <CContainer fluid>
@@ -25,11 +28,13 @@
 
 <script>
 import AppBreadcrumb from './AppBreadcrumb'
+import AppHeaderDropdownAccnt from './AppHeaderDropdownAccnt'
 
 export default {
   name: 'AppHeader',
   components: {
     AppBreadcrumb,
+    AppHeaderDropdownAccnt,
   },
   setup() {
     return {}
