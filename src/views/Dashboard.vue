@@ -10,9 +10,42 @@
 
   <hr />
 
-  <CCard>
-    <CCardBody>This is the start page</CCardBody>
-  </CCard>
+  <div v-if="isLoggedin">
+    <CCard>
+      <CCardBody> Välkommen </CCardBody>
+      <button @click="logout">Logout</button>
+    </CCard>
+  </div>
+  <div v-else>
+    <CCard>
+      <CCardBody> Logga in </CCardBody>
+      <button @click="login">Login</button>
+    </CCard>
+  </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: 'Dashboard',
+  components: {},
+  setup() {
+    return {}
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('auth/login')
+    },
+    logout() {
+      this.$store.dispatch('auth/logout')
+    },
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.auth.isAuthenticated
+    },
+    user() {
+      return this.$store.state.auth.user
+    },
+  },
+}
+</script>

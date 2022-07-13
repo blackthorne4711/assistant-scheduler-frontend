@@ -11,6 +11,22 @@
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
+                <div>
+                  <div id="label">Sign-in with Microsoft Azure AD B2C</div>
+
+                  <button @click="login" v-if="!isLoggedIn">Login</button>
+                  <button @click="logout" v-if="isLoggedIn">Logout</button>
+
+                  <div v-if="isLoggedIn">
+                    Hello from Vue.js. User is {{ user.name }}
+                  </div>
+                </div>
+              </CCardBody>
+            </CCard>
+          </CCardGroup>
+          <CCardGroup>
+            <CCard class="p-4">
+              <CCardBody>
                 <CForm>
                   <h1>Login</h1>
                   <p class="text-medium-emphasis">
@@ -56,9 +72,11 @@
                     Om du saknar konto så kan du ansöka om konto här, för att
                     kunna se tillgängliga tider att hjälpa till i stallet.
                   </p>
-                  <CButton color="light" variant="outline" class="mt-3">
-                    Registrering
-                  </CButton>
+                  <CNavLink href="#/pages/register">
+                    <CButton color="light" variant="outline" class="mt-3">
+                      Registrering
+                    </CButton>
+                  </CNavLink>
                 </div>
               </CCardBody>
             </CCard>
@@ -79,6 +97,22 @@ export default {
     return {
       logo,
     }
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('auth/login')
+    },
+    logout() {
+      this.$store.dispatch('auth/logout')
+    },
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.auth.isAuthenticated
+    },
+    user() {
+      return this.$store.state.auth.user
+    },
   },
 }
 </script>

@@ -18,7 +18,7 @@
                   </p>
                   <CRow>
                     <CCol :xs="6">
-                      <CNavLink href="#/user/login">
+                      <CNavLink href="#/pages/login">
                         <CButton color="primary" class="px-4">
                           Gå till Login
                         </CButton>

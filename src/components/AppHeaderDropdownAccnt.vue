@@ -14,7 +14,7 @@
       </CDropdownItem>
       <CDropdownDivider />
       <CDropdownItem>
-        <CNavLink href="#/user/logout">
+        <CNavLink href="#/pages/logout">
           <CIcon icon="cil-lock-locked" /> Logout
         </CNavLink>
       </CDropdownItem>
@@ -29,7 +29,6 @@ export default {
   setup() {
     return {
       avatar: avatar,
-      itemsCount: 42,
     }
   },
 }

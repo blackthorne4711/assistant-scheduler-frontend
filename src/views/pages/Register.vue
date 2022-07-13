@@ -6,13 +6,13 @@
           <CCard class="mx-4">
             <CCardBody class="p-4">
               <CForm>
-                <h1>Register</h1>
-                <p class="text-medium-emphasis">Create your account</p>
+                <h1>Registrera dig</h1>
+                <p class="text-medium-emphasis">Skapa ditt konto</p>
                 <CInputGroup class="mb-3">
                   <CInputGroupText>
                     <CIcon icon="cil-user" />
                   </CInputGroupText>
-                  <CFormInput placeholder="Username" autocomplete="username" />
+                  <CFormInput placeholder="Namn" autocomplete="name" />
                 </CInputGroup>
                 <CInputGroup class="mb-3">
                   <CInputGroupText>@</CInputGroupText>

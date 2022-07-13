@@ -88,24 +88,12 @@ const routes = [
             name: 'Settings',
             component: () => import('@/views/user/Settings.vue'),
           },
-          {
-            path: '/user/login',
-            name: 'Login',
-            component: () => import('@/views/user/Login'),
-          },
-          {
-            path: '/user/logout',
-            name: 'Logout',
-            component: () => import('@/views/user/Logout'),
-          },
-          {
-            path: '/user/register',
-            name: 'Register',
-            component: () => import('@/views/user/Register'),
-          },
         ],
       },
     ],
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/pages',
@@ -127,7 +115,25 @@ const routes = [
         name: 'Page500',
         component: () => import('@/views/pages/Page500'),
       },
+      {
+        path: 'login',
+        name: 'Login',
+        component: () => import('@/views/pages/Login'),
+      },
+      {
+        path: 'logout',
+        name: 'Logout',
+        component: () => import('@/views/pages/Logout'),
+      },
+      {
+        path: 'register',
+        name: 'Register',
+        component: () => import('@/views/pages/Register'),
+      },
     ],
+    meta: {
+      requiresAuth: false,
+    },
   },
 ]
 
@@ -138,6 +144,13 @@ const router = createRouter({
     // always scroll to top
     return { top: 0 }
   },
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    console.log(`Requires authentication`)
+  }
+  next()
 })
 
 export default router

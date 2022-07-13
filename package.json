@@ -2,7 +2,6 @@
   "name": "@blackthorne4711/assistant-scheduler-frontend",
   "version": "0.1.0",
   "description": "Assistant Scheduler frontend (using CoreUI Free Vue Admin Template)",
-
   "repository": {
     "type": "git",
     "url": "git@github.com:blackthorne4711/assistant-scheduler-frontend.git"
@@ -20,6 +19,8 @@
     "coreui_library_short_version": "4.1"
   },
   "dependencies": {
+    "@azure/core-http": "^2.2.5",
+    "@azure/msal-browser": "^2.27.0",
     "@coreui/chartjs": "^3.0.0",
     "@coreui/coreui": "^4.1.0",
     "@coreui/icons": "^2.1.0",
@@ -28,6 +29,8 @@
     "@coreui/vue": "^4.1.0",
     "@coreui/vue-chartjs": "2.0.0",
     "core-js": "^3.19.0",
+    "msal": "^1.4.16",
+    "tiny-emitter": "^2.1.0",
     "vue": "^3.2.23",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"

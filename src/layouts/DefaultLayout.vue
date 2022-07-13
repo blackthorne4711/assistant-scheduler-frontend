@@ -12,6 +12,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { CContainer } from '@coreui/vue'
 import AppFooter from '@/components/AppFooter.vue'
