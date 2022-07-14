@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Start page</h2>
+    <h2>Välkommen {{ user.name }}</h2>
   </div>
 
   <CAlert color="success" v-bind:visible="true">
@@ -10,16 +10,9 @@
 
   <hr />
 
-  <div v-if="isLoggedin">
+  <div>
     <CCard>
-      <CCardBody> Välkommen </CCardBody>
-      <button @click="logout">Logout</button>
-    </CCard>
-  </div>
-  <div v-else>
-    <CCard>
-      <CCardBody> Logga in </CCardBody>
-      <button @click="login">Login</button>
+      <CCardBody>Här skall det finnas bra information</CCardBody>
     </CCard>
   </div>
 </template>

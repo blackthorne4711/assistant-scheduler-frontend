@@ -5,24 +5,26 @@ const authority = process.env.VUE_APP_AUTHORITY
 //const scopes = [process.env.VUE_APP_SCOPE_READ]
 const scopes = ['profile', 'email']
 
-console.log(`clientid = ${clientid}`)
-console.log(`authority = ${authority}`)
-console.log(`scopes = ${scopes}`)
+//console.log(`clientid = ${clientid}`)
+//console.log(`authority = ${authority}`)
+//console.log(`scopes = ${scopes}`)
 
 const authservice = new AuthService(clientid, authority, scopes)
 
 export default {
   namespaced: true,
   state: {
-    isAuthenticated: false,
-    user: {},
+    isAuthenticated: !!JSON.parse(localStorage.getItem('isAuthenticated')),
+    user: JSON.parse(localStorage.getItem('user')),
   },
   mutations: {
     updateIsAuthenticated(state, value) {
       state.isAuthenticated = value
+      localStorage.setItem('isAuthenticated', JSON.stringify(value))
     },
     updateUser(state, value) {
       state.user = value
+      localStorage.setItem('user', JSON.stringify(value))
     },
   },
   actions: {

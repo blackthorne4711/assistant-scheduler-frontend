@@ -2,6 +2,7 @@
   <CDropdown variant="nav-item">
     <CDropdownToggle placement="bottom-end" class="py-0" :caret="false">
       <CAvatar :src="avatar" size="md" />
+      {{ user.name }}
     </CDropdownToggle>
     <CDropdownMenu class="pt-0">
       <CDropdownHeader component="h6" class="bg-light fw-semibold py-2">
@@ -15,7 +16,7 @@
       <CDropdownDivider />
       <CDropdownItem>
         <CNavLink href="#/pages/logout">
-          <CIcon icon="cil-lock-locked" /> Logout
+          <CIcon icon="cil-lock-locked" @click="logout" /> Logout
         </CNavLink>
       </CDropdownItem>
     </CDropdownMenu>
@@ -30,6 +31,16 @@ export default {
     return {
       avatar: avatar,
     }
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout')
+    },
   },
 }
 </script>
