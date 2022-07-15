@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Välkommen {{ user.name }}</h2>
+    <h2>Välkommen {{ user.name }} ({{ user.userName }})</h2>
   </div>
 
   <CAlert color="success" v-bind:visible="true">
@@ -33,11 +33,13 @@ export default {
     },
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.state.auth.isAuthenticated
-    },
     user() {
-      return this.$store.state.auth.user
+      try {
+        var userInfo = JSON.parse(localStorage.getItem('user'))
+      } catch (e) {
+        throw new Error('Error occured: ', e)
+      }
+      return userInfo
     },
   },
 }
