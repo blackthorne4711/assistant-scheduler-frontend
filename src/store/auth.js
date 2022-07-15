@@ -5,9 +5,9 @@ const authority = process.env.VUE_APP_AUTHORITY
 //const scopes = [process.env.VUE_APP_SCOPE_READ]
 const scopes = ['profile', 'email']
 
-//console.log(`clientid = ${clientid}`)
-//console.log(`authority = ${authority}`)
-//console.log(`scopes = ${scopes}`)
+console.log(`clientid = ${clientid}`)
+console.log(`authority = ${authority}`)
+console.log(`scopes = ${scopes}`)
 
 const authservice = new AuthService(clientid, authority, scopes)
 
