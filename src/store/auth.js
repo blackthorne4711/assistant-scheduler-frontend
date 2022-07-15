@@ -1,10 +1,7 @@
 import AuthService from '../services/AuthService.js'
 
-//const clientid = process.env.VUE_APP_CLIENT_ID
-//const authority = process.env.VUE_APP_AUTHORITY
-//const scopes = [process.env.VUE_APP_SCOPE_READ]
-const clientid = '6dcb60bd-625f-49f2-9e36-20b5c9cdc873'
-const authority = 'https://login.microsoftonline.com/f2e6e048-788b-439f-ab45-6fed3499a1f2/'
+const clientid = process.env.VUE_APP_CLIENT_ID
+const authority = process.env.VUE_APP_AUTHORITY
 const scopes = ['profile', 'email']
 
 console.log(`clientid = ${clientid}`)
