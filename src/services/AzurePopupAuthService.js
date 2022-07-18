@@ -1,6 +1,6 @@
 import * as Msal from 'msal'
 
-export default class AuthService {
+export default class AzurePopupAuthService {
   constructor(clientid, authority, scopes) {
     this.app = new Msal.UserAgentApplication({
       auth: {
@@ -18,6 +18,7 @@ export default class AuthService {
   async login() {
     const loginRequest = {
       scopes: this.scopes,
+      // prompt: 'consent',
       prompt: 'select_account',
     }
 
@@ -33,10 +34,10 @@ export default class AuthService {
       return undefined
     }
 
+    let tokenResponse = {}
+
     try {
-      const tokenResponse = await this.app.acquireTokenSilent(
-        accessTokenRequest,
-      )
+      tokenResponse = await this.app.acquireTokenSilent(accessTokenRequest)
       console.log(`Token response acquired silently - ${tokenResponse}`)
     } catch (error) {
       console.log(
@@ -44,9 +45,7 @@ export default class AuthService {
       )
 
       try {
-        const tokenResponse = await this.app.acquireTokenPopup(
-          accessTokenRequest,
-        )
+        tokenResponse = await this.app.acquireTokenPopup(accessTokenRequest)
         console.log(`Token response acquired with a pop up - ${tokenResponse}`)
       } catch (errorPopup) {
         console.log(`Error acquiring the popup: ${errorPopup}`)
@@ -54,7 +53,7 @@ export default class AuthService {
       }
     }
 
-    return this.getUser()
+    return [this.getUser(), tokenResponse.accessToken]
   }
 
   logout() {

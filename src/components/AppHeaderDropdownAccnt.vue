@@ -14,7 +14,7 @@
         </CNavLink>
       </CDropdownItem>
       <CDropdownDivider />
-      <CDropdownItem>
+      <CDropdownItem @click="logout">
         <CNavLink href="#/pages/logout">
           <CIcon icon="cil-lock-locked" @click="logout" /> Logout
         </CNavLink>

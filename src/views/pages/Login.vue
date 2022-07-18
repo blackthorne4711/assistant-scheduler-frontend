@@ -14,8 +14,7 @@
                 <div>
                   <div id="label">Sign-in with Microsoft Azure AD B2C</div>
 
-                  <button @click="login" v-if="!isLoggedIn">Login</button>
-                  <button @click="logout" v-if="isLoggedIn">Logout</button>
+                  <button @click="popuplogin" v-if="!isLoggedIn">Login</button>
 
                   <div v-if="isLoggedIn">
                     Hello from Vue.js. User is {{ user.name }}
@@ -53,7 +52,9 @@
                   </CInputGroup>
                   <CRow>
                     <CCol :xs="6">
-                      <CButton color="primary" class="px-4"> Login </CButton>
+                      <CButton color="primary" class="px-4" @click="basiclogin">
+                        Login
+                      </CButton>
                     </CCol>
                     <CCol :xs="6" class="text-right">
                       <CButton color="link" class="px-0">
@@ -99,8 +100,11 @@ export default {
     }
   },
   methods: {
-    login() {
-      this.$store.dispatch('auth/login')
+    popuplogin() {
+      this.$store.dispatch('auth/popuplogin')
+    },
+    basiclogin() {
+      this.$store.dispatch('auth/basiclogin')
     },
     logout() {
       this.$store.dispatch('auth/logout')
