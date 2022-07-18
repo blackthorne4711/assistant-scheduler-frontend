@@ -11,21 +11,6 @@
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
-                <div>
-                  <div id="label">Sign-in with Microsoft Azure AD B2C</div>
-
-                  <button @click="popuplogin" v-if="!isLoggedIn">Login</button>
-
-                  <div v-if="isLoggedIn">
-                    Hello from Vue.js. User is {{ user.name }}
-                  </div>
-                </div>
-              </CCardBody>
-            </CCard>
-          </CCardGroup>
-          <CCardGroup>
-            <CCard class="p-4">
-              <CCardBody>
                 <CForm>
                   <h1>Login</h1>
                   <p class="text-medium-emphasis">
@@ -36,8 +21,10 @@
                       <CIcon icon="cil-user" />
                     </CInputGroupText>
                     <CFormInput
-                      placeholder="Användarnamn"
-                      autocomplete="username"
+                      type="email"
+                      placeholder="Email"
+                      autocomplete="email"
+                      @input="loginemail = $event.target.value"
                     />
                   </CInputGroup>
                   <CInputGroup class="mb-4">
@@ -48,6 +35,7 @@
                       type="password"
                       placeholder="Lösenord"
                       autocomplete="current-password"
+                      @input="loginpassword = $event.target.value"
                     />
                   </CInputGroup>
                   <CRow>
@@ -90,32 +78,41 @@
 
 <script>
 import { logo } from '@/assets/logo/logo'
+import firebaseService from '../../services/FirebaseService.js'
 
 export default {
   name: 'Login',
   components: {},
+  created: function () {
+    firebaseService.onAuth()
+  },
   setup() {
+    let loginemail = ''
+    let loginpassword = ''
+
     return {
       logo,
+      loginemail,
+      loginpassword,
     }
   },
   methods: {
-    popuplogin() {
-      this.$store.dispatch('auth/popuplogin')
-    },
     basiclogin() {
-      this.$store.dispatch('auth/basiclogin')
-    },
-    logout() {
-      this.$store.dispatch('auth/logout')
-    },
-  },
-  computed: {
-    isLoggedIn() {
-      return this.$store.state.auth.isAuthenticated
-    },
-    user() {
-      return this.$store.state.auth.user
+      firebaseService
+        .loginWithBasicAuth(this.loginemail, this.loginpassword)
+        .then(() => {
+          console.log('Successfully logged in')
+          firebaseService.onAuth()
+          this.$router.push('/dashboard')
+        })
+        .catch((err) => {
+          console.log(err)
+          console.log('Error loggin in (' + err.message + ')')
+          setTimeout(this.$toast.clear, 3000)
+          this.$toast.error(
+            'Inloggningen misslyckades. Kontrollera email och lösenord, och försök igen.',
+          )
+        })
     },
   },
 }

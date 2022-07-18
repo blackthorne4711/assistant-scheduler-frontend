@@ -2,7 +2,7 @@
   <CDropdown variant="nav-item">
     <CDropdownToggle placement="bottom-end" class="py-0" :caret="false">
       <CAvatar :src="avatar" size="md" />
-      {{ user.name }}
+      {{ user.email }}
     </CDropdownToggle>
     <CDropdownMenu class="pt-0">
       <CDropdownHeader component="h6" class="bg-light fw-semibold py-2">
@@ -25,6 +25,8 @@
 
 <script>
 import avatar from '@/assets/images/User-icon.png'
+import firebaseService from '../services/FirebaseService.js'
+
 export default {
   name: 'AppHeaderDropdownAccnt',
   setup() {
@@ -34,12 +36,12 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.state.auth.user
+      return firebaseService.getUser()
     },
   },
   methods: {
     logout() {
-      this.$store.dispatch('auth/logout')
+      firebaseService.logout()
     },
   },
 }
