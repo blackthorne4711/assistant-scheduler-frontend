@@ -107,7 +107,9 @@ export default {
         })
         .catch((err) => {
           console.log(err)
-          console.log('Error loggin in (' + err.message + ')')
+          console.log(
+            'Error loggin in - ' + err.code + ' (' + err.message + ')',
+          )
           setTimeout(this.$toast.clear, 3000)
           this.$toast.error(
             'Inloggningen misslyckades. Kontrollera email och lösenord, och försök igen.',

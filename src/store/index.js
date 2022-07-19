@@ -3,18 +3,19 @@ import users from './users'
 
 export default createStore({
   state: {
-    user: {},
-    status: false,
-    sidebarVisible: '',
+    authUser: {},
+    authStatus: false,
+    authInitialized: false,
+    sidebarVisible: false,
     sidebarUnfoldable: false,
   },
   getters: {
     user(state) {
-      return state.user
+      return state.authUser
     },
     isSignedIn(state) {
-      console.log('DEBUG - isSignedIn')
-      return state.status
+      console.log('DEBUG - isSignedIn - ' + state.authStatus)
+      return state.authStatus
     },
   },
   mutations: {
@@ -27,13 +28,22 @@ export default createStore({
     updateSidebarVisible(state, payload) {
       state.sidebarVisible = payload.value
     },
-    onAuthStateChanged(state, user) {
-      console.log('DEBUG - onAuthStateChanged - ' + user)
-      state.user = user
+    onUserStateChanged(state, user) {
+      console.log('DEBUG - onUserStateChanged - ' + user)
+      state.authUser = user
+      //state.authInitialized = true
     },
-    onUserStatusChanged(state, status) {
-      console.log('DEBUG - onUserStatusChanged' + status)
-      state.status = status
+    onAuthStatusChanged(state, status) {
+      console.log('DEBUG - onAuthStatusChanged - ' + status)
+      state.authStatus = status
+    },
+    onAuthInitialized(state) {
+      if (!state.authInitialized) {
+        state.authInitialized = true
+        console.log(
+          'Authentication initialized (' + state.authInitialized + ')',
+        )
+      }
     },
   },
   action: {},

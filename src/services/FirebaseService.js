@@ -20,7 +20,7 @@ const config = {
 export default {
   init() {
     getAnalytics(firebase.initializeApp(config))
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
   },
   loginWithGooglePopup() {
     const provider = new firebase.auth.GoogleAuthProvider()
@@ -31,17 +31,20 @@ export default {
   },
   logout() {
     firebase.auth().signOut()
-    store.commit('onAuthStateChanged', {})
-    store.commit('onUserStatusChanged', false)
+    store.commit('onUserStateChanged', {})
+    store.commit('onAuthStatusChanged', false)
   },
   onAuth() {
     firebase.auth().onAuthStateChanged((user) => {
       user = user ? user : {}
-      store.commit('onAuthStateChanged', user)
-      store.commit('onUserStatusChanged', user.uid ? true : false)
+      store.commit('onUserStateChanged', user)
+      store.commit('onAuthStatusChanged', user.uid ? true : false)
+      store.commit('onAuthInitialized')
     })
   },
   getUser() {
+    // getAnalytics(firebase.initializeApp(config))
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     let user = firebase.auth().currentUser
     return (user = user ? user : {})
   },

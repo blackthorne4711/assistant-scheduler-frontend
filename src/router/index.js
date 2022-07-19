@@ -1,6 +1,8 @@
 import { h, resolveComponent } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-import firebaseService from '../services/FirebaseService.js'
+//import firebaseService from '../services/FirebaseService.js'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import store from '../store'
 
 import DefaultLayout from '@/layouts/DefaultLayout'
 
@@ -147,26 +149,43 @@ const router = createRouter({
   },
 })
 
-router.beforeEach((to, from, next) => {
-  firebaseService.init()
+const getCurrentUser = () =>
+  new Promise((resolve, reject) => {
+    const removeListener = onAuthStateChanged(
+      getAuth(),
+      (user) => {
+        removeListener()
+        resolve(user)
+      },
+      reject,
+    )
+  })
+
+router.beforeEach(async (to, from, next) => {
+  let user = await getCurrentUser()
+
+  console.log(user)
 
   const requiresAuth = to.meta.requiresAuth
-  const user = firebaseService.getUser()
-  const isAuthenticated = user.uid ? true : false
+  const isInitialised = store.state.authInitialized
+  const isAuthenticated = store.state.authStatus
 
   console.log('DEBUG: Requires authentication ' + String(requiresAuth))
+  console.log('DEBUG: Is initialized ' + String(isInitialised))
   console.log('DEBUG: Is authenticated ' + String(isAuthenticated))
-  console.log('DEBUG: to.name = ' + String(to.name))
 
-  if (requiresAuth && !isAuthenticated && to.name !== 'Login') {
-    console.log('Redirect to login')
-    next('/pages/login')
-    return
-  } else if (isAuthenticated && to.name == 'Login') {
-    console.log('Redirect to dashboard')
-    next('/dashboard')
-    return
+  if (isInitialised) {
+    if (requiresAuth && !isAuthenticated && to.name !== 'Login') {
+      console.log('Redirect to login')
+      next('/pages/login')
+      return
+    } else if (isAuthenticated && to.name == 'Login') {
+      console.log('Redirect to dashboard')
+      next('/dashboard')
+      return
+    }
   }
+
   next()
 })
 
